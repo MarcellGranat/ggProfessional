@@ -1,3 +1,9 @@
+#' Saves the plot to a new csv file (numbered).
+#'
+#' @param plot ..
+#' @param folder_name ..
+#' @export
+
 plot_to_csv <- function(plot = ggplot2::last_plot(), folder_name = "figures") {
   if (!paste0("./", folder_name) %in% list.dirs()) {
     dir.create(folder_name)

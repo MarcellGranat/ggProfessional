@@ -1,3 +1,8 @@
+#' Remove a locally registered palette.
+#'
+#' @param name ..
+#' @export
+
 remove_palette <- function(name) {
   file_name <- path.package("ggProfessional") |>
     paste0("/pals.rds")

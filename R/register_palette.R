@@ -1,9 +1,19 @@
+#' Register a palette locally.
+#'
+#' @param pal character vector (can be named).
+#' @param name ..
+#' @export
+
 register_palette <- function(pal, name) {
   file_name <- path.package("ggProfessional") |>
-    paste0("/pals.rds")
+    paste0("/pals.RDS")
 
   if (!is.character(pal)) {
     stop("`pal` must be a character vector (named preferably)!")
+  }
+
+  if (!file_name %in% list.files(path.package(package = "ggProfessional"), full.names = TRUE)) {
+    saveRDS(list(), file_name)
   }
 
   pals <- readr::read_rds(file_name)

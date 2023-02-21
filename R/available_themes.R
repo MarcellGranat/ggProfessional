@@ -1,3 +1,8 @@
+#' Shows the registered themes.
+#'
+#' @param show Show only this specific.
+#' @export
+
 available_themes <- function(show = NULL) {
   p <- ggplot2::ggplot(iris, ggplot2::aes(Sepal.Length, Petal.Width, color = Species)) +
     ggplot2::geom_point()

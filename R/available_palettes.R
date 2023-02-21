@@ -1,3 +1,7 @@
+#' Shows the registered palettes.
+#'
+#' @export
+
 available_palettes <- function() {
   pals <- path.package("ggProfessional") |>
     paste0("/pals.rds") |>
@@ -11,7 +15,7 @@ available_palettes <- function() {
       tibble::tibble(name = x[[1]], col_name = names(x[[2]]), col_id = x[[2]])
     })
 
-  cols <- set_names(pals_df$col_id, pals_df$col_id)
+  cols <- purrr::set_names(pals_df$col_id, pals_df$col_id)
 
   pals_df |>
     dplyr::group_by(name) |>

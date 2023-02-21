@@ -1,3 +1,8 @@
+#' Remove a locally registered theme.
+#'
+#' @param name ..
+#' @export
+
 remove_theme <- function(name) {
   file_name <- path.package("ggProfessional") |>
     paste0("/theme.rds")

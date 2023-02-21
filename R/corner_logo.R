@@ -1,10 +1,29 @@
+#' Add corner logo
+#'
+#' @param plot ..
+#' @param logo ..
+#' @param alpha ..
+#' @param position ..
+#' @param size ..
+#'
+#' @return gg.
+#' @export
+#' @examples
+#'
+#' library(ggProfessional)
+#'
+#' ggplot(iris, aes(Sepal.Length, Petal.Width)) +
+#' geom_point() -
+#' corner_logo
+#'
+
 corner_logo <- function(plot = ggplot2::last_plot(), logo = NULL, alpha = 1, position = "bottom-right", size = 1){
   logo_dir <- paste0(path.package("ggProfessional"), "/logos")
 
   if (is.null(logo)) {
     logo <- list.files(logo_dir, full.names = T) |>
       file.info() |>
-      pull(mtime) |>
+      dplyr::pull(mtime) |>
       (\(x) list.files(logo_dir)[which(x == max(x))]) ()
   } else {
     logo <- paste0(logo, ".png")
@@ -12,14 +31,16 @@ corner_logo <- function(plot = ggplot2::last_plot(), logo = NULL, alpha = 1, pos
 
   img <- png::readPNG(paste0(logo_dir, "/", logo), FALSE, FALSE)
 
-  img <- matrix(grDevices::rgb(img[,,1], img[,,2], img[,,3],
-                               img[,,4] * alpha), nrow=dim(img)[1])
+  img_fade <- matrix(grDevices::rgb(img[,,1], img[,,2], img[,,3], alpha), nrow=dim(img)[1])
+  tryCatch({
+    img_fade <- matrix(grDevices::rgb(img[,,1], img[,,2], img[,,3], img[,,4] * alpha), nrow=dim(img)[1])
+  }, error = \(e) {})
 
-  g <- grid::rasterGrob(img, interpolate=TRUE)
+  g <- grid::rasterGrob(img_fade, interpolate=TRUE)
 
   plot_axis <- ggplot2::ggplot_build(plot) |>
-    pluck(1) |>
-    pluck(1)
+    purrr::pluck(1) |>
+    purrr::pluck(1)
 
   if (position == "bottom-right") {
 

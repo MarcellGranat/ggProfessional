@@ -1,3 +1,9 @@
+#' Set a palette as default for current sessoion.
+#'
+#' @param name ..
+#' @param attach Set as default?
+#' @export
+
 set_palette <- function(name, attach = FALSE, low = NULL, high = NULL) {
   file_name <- path.package("ggProfessional") |>
     paste0("/pals.rds")

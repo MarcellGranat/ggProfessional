@@ -1,3 +1,9 @@
+#' Save figures to one excel file (numbered).
+#'
+#' @param plot ..
+#' @param file_name ..
+#' @export
+
 plot_to_excel <- function(plot = ggplot2::last_plot(), file_name = "figures.xlsx") {
   if (!file_name %in% list.files()) {
     n_sheets <- 0
