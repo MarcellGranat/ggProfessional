@@ -1,6 +1,7 @@
 Package: ggProfessional
 Title: Use GGplot2 In a Professional Way
 Version: 0.1.0
+License: MIT
 Authors@R: 
     person("Marcell", "Granat", , "granat.marcell@uni-neumann.hu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4036-1500"))

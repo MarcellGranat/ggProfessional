@@ -1,0 +1,6 @@
+template:
+  bootstrap: 5
+  bslib:
+    bg: "#222222"
+    fg: "#46babb"
+    primary: "#f8c349"

@@ -63,7 +63,7 @@ ggplot(iris, aes(Sepal.Length, Petal.Width)) +
   .gg_finalise # no brackets!
 ```
 
-![](README-unnamed-chunk-5-1.png)<!-- -->
+![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 
 ``` r
 .gg_finalise <<- function(plot = ggplot2::last_plot()) {
@@ -74,7 +74,7 @@ ggplot(iris, aes(Sepal.Length, Petal.Width)) +
   }
 ```
 
-<img src="meme.png" width="60%" style="display: block; margin: auto;" />
+<img src="man/figures/meme.png" width="60%" style="display: block; margin: auto;" />
 
 ### Manage themes and palettes
 
@@ -85,17 +85,23 @@ to save your theme and reuse that in all of your projects.
 
 ``` r
 register_theme(ggplot2::theme_bw() + theme(title = element_text(color = "red")), name = "rbw")
-register_theme(ggplot2::theme_bw() + theme(title = element_text(color = "green")), name = "gbw")
+register_theme(ggplot2::theme_minimal() + theme(title = element_text(color = "green")), name = "gminimal")
 ```
 
 ``` r
 available_themes()
 ```
 
-![](README-unnamed-chunk-9-1.png)<!-- -->
+![](man/figures/unnamed-chunk-9-1.png)<!-- -->
+
+Similarly you have these functions for palettes. But `set_palette` will
+create a `.co` hidden function that helps you to easily use your own
+palette (e.g. `.co(1:2)` returns the first two colors in your palette,
+but you can also use named colors.). `set_palette` can also register the
+colors as default.
 
 ``` r
-register_palette(c("red1", "red2", "steelblue", "blue2", "green", "yellow", "#FF6F91"), name = "first")
+register_palette(c("red1", "#0c4853", "steelblue", "blue2", "green", "yellow", "#FF6F91"), name = "first")
 register_palette(c("blue", "purple", "cyan", "blue2", "orange", "yellow", "#FF6F91"), name = "sec")
 ```
 
@@ -103,18 +109,19 @@ register_palette(c("blue", "purple", "cyan", "blue2", "orange", "yellow", "#FF6F
 available_palettes()
 ```
 
-![](README-unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
-remove_palette("first")
-remove_palette("sec")
+set_palette("first")
 ```
 
-Similarly you have these functions for palettes. But `set_palette` will
-create a `.co` hidden function that helps you to easily use your own
-palette (e.g. .co(1:2) returns the first two colors in your palette, but
-you can also use named colors.). `set_palette` can also register the
-colors as default.
+``` r
+.co(1:3)
+#> [1] "red1"      "#0c4853"   "steelblue"
+```
+
+**Note:** If you set `attach = TRUE`, then colors on all ggplot figures
+will be automatically updates with this palette.
 
 ### Logos
 
@@ -130,7 +137,7 @@ ggplot(iris, aes(Sepal.Length, Petal.Width)) +
   watermark_logo("ggp", alpha = .2)
 ```
 
-![](README-unnamed-chunk-14-1.png)<!-- -->
+![](man/figures/unnamed-chunk-16-1.png)<!-- -->
 
 ``` r
 ggplot(iris, aes(Sepal.Length, Petal.Width)) + 
@@ -138,4 +145,4 @@ ggplot(iris, aes(Sepal.Length, Petal.Width)) +
   corner_logo
 ```
 
-![](README-unnamed-chunk-15-1.png)<!-- -->
+![](man/figures/unnamed-chunk-17-1.png)<!-- -->
